@@ -1,33 +1,15 @@
 '''
 Created on Oct 12, 2020
+Modified Nov 6, 2020
 
+Flow:
 1. List genes from gtf file (start, stop, strand, gene id)
-2. List SNPs from input file (just positions)
-3. Count number of SNPs in each gene. Also calculate normalized score based on gene length.
-4. Output .csv file with gene id, no. of hits, no of. normalized hits, start, stop, length
+2. List SNPs from input file. If SNP crosses thershold, mark it has a critical hit.
+3. Count number of SNPs in each gene. Also calculate number of critical hits per gene and ratio of critical to all hits. Also calculate normalized score based on gene length.
+4. Output .csv file with gene id, no. of hits, no. of critical hits, relative critical hits (cricital hits divided by total hits), hits normalized by length, gene start, gene stop and gene length
 
 Requires biopython (python 3)
 See --help for arguments
-
-Version 2:
-Instead of normalizing against gene length, report the fraction of snips over all snips in each gene.
-
-
-Additions:
-saitit aina fixed between species
-contig 0 | SNP 1 | BC2fla (introgressio flavoon) 2 | BC2mon (introgressio montanaan) 3 | mon (ref, 0) 4 | fla (1) 5 | chromosome 6 |
-
-Kerrotaan mikä kromosomi
--- chromosome: monCan3F1.sct.00001
-Kerrotaan mikä raja snipin laskemiseen
--- threshold 0.05
-Minkä lajin suhteen katsotaan frekvenssit
--- result_column BC2mon
-
-1. Filter rows by chromosome
-2.
-3. Katso KAIKKI snipit kullekin geenille
-4. Laske
 
 @author: Ville Hoikkala
 
