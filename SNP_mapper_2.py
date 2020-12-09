@@ -237,13 +237,19 @@ for ORF in ORFobjects:
 
 # #Calculate normalized hit score based on gene length and the proportion of hits crossing threshold
 for o in ORFobjects:
-    norm_score = round(Decimal(o.hits/o.length*10000),2)
-    critical_hits =  o.critical_hits #hits passing threshold
-    if o.hits > 0:
-        relative_critical_hits =  round(Decimal(o.critical_hits/o.hits),2)
-        setattr(o, "relative_critical_hits", relative_critical_hits)
-    setattr(o, "norm_score", norm_score)
-    setattr(o, "critical_hits", critical_hits)
+    if o.length != 0:
+        norm_score = round(Decimal(o.hits/o.length*10000),2)
+        critical_hits =  o.critical_hits #hits passing threshold
+        if o.hits > 0:
+            relative_critical_hits =  round(Decimal(o.critical_hits/o.hits),2)
+            setattr(o, "relative_critical_hits", relative_critical_hits)
+        setattr(o, "norm_score", norm_score)
+        setattr(o, "critical_hits", critical_hits)
+     elif o.length == 0:
+        setattr(o, "norm_score", 0)
+        setattr(o, "critical_hits", 0)
+        setattr(o, "relative_critical_hits", 0)
+        print(o.ID + " has length of 0. Ignoring and setting all attributes to 0")
 
 # #Sort the ORF list
 ORFobjects.sort(key=lambda x: x.relative_critical_hits, reverse=True)
