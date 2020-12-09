@@ -245,7 +245,7 @@ for o in ORFobjects:
             setattr(o, "relative_critical_hits", relative_critical_hits)
         setattr(o, "norm_score", norm_score)
         setattr(o, "critical_hits", critical_hits)
-     elif o.length == 0:
+    elif o.length == 0:
         setattr(o, "norm_score", 0)
         setattr(o, "critical_hits", 0)
         setattr(o, "relative_critical_hits", 0)
