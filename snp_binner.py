@@ -40,7 +40,7 @@ print(len(binSNPs))
 
 binDic = {}
 
-binCounter = 0
+binCounter = 1
 while binCounter <= bins:
     binDic[binCounter] = 0
     binCounter += 1
@@ -65,8 +65,16 @@ for bin, hits in binDic.items():
             binDic[bin] += 1
     binCounter += 1
 
+binCounter = 0
 for bin, hits in binDic.items():
+    binstart = binCounter * binsize + 1
+    binstop = binstart + binsize - 1
+    #print("Bin start: " + str(binstart))
+    #print("Bin stop: " + str(binstop))
     print("Bin: " + str(bin) + ". SNPs: " + str(hits))
+    #print(str(hits))
+    binCounter += 1
+
 #for i in snps:
     #print(i)
 
