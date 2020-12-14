@@ -42,6 +42,7 @@ for loc in locations:
         gene_stop = g[4]
         if (((gene_start < loc_start and gene_stop > loc_start) or   (gene_start > loc_start and gene_stop > loc_start and gene_stop < loc_stop) or  (gene_start < loc_stop and gene_stop > loc_stop))  and g[0] == loc[0]):
             chosenGenes.append(g)
+            ORFs.remove(g)
             genecounter =+ 1
 
 with open(outputfile, "w") as outfile:
