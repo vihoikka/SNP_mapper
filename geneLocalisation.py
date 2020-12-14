@@ -10,9 +10,9 @@ import sys
 import datetime
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-g","--genes", help="input gtf file with predicted gene regions")
-parser.add_argument("-l","--locations", help="locations to search genes from")
-parser.add_argument("-o","--outfile", help="output filename")
+parser.add_argument("-g","--genes", help="input gtf file with predicted gene regions", required = True)
+parser.add_argument("-l","--locations", help="locations to search genes from", required = True)
+parser.add_argument("-o","--outfile", help="output filename", required = True)
 args = parser.parse_args()
 
 
@@ -40,7 +40,7 @@ for loc in locations:
     for g in ORFs:
         gene_start = g[3]
         gene_stop = g[4]
-        if ((gene_start < loc_start and gene_stop > loc_start) or   (gene_start > loc_start and gene_stop > loc_start and gene_stop < loc_stop) or  (gene_start < loc_stop and gene_stop > loc_stop)):
+        if (((gene_start < loc_start and gene_stop > loc_start) or   (gene_start > loc_start and gene_stop > loc_start and gene_stop < loc_stop) or  (gene_start < loc_stop and gene_stop > loc_stop))  and g[0] == loc[0]):
             chosenGenes.append(g)
             genecounter =+ 1
 
