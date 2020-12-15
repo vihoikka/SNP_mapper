@@ -46,5 +46,5 @@ for loc in locations:
             genecounter =+ 1
 
 with open(outputfile, "w") as outfile:
-    writer = csv.writer(outfile)
+    writer = csv.writer(outfile, delimiter='\t')
     writer.writerows(chosenGenes)
