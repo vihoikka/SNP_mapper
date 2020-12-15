@@ -55,6 +55,7 @@ print("Number of snps: " + str(len(snps)))
 
 binCounter = 0
 for bin, hits in binDic.items(): #count hits in bins
+    print("Analyzing bin " + str(binCounter + 1))
     #print(binsize)
     binstart = binCounter * binsize + 1
     binstop = binstart + binsize - 1
