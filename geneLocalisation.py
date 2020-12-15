@@ -35,14 +35,18 @@ chosenGenes = []
 genecounter = 0
 
 for loc in locations:
-    loc_start = loc[1]
-    loc_stop = loc[2]
+    loc_start = int(loc[1])
+    loc_stop = int(loc[2])
+    #print(loc_start)
+    #print(loc_stop)
     for g in ORFs:
-        gene_start = g[3]
-        gene_stop = g[4]
+        gene_start = int(g[3])
+        gene_stop = int(g[4])
+        #print("gene start: " + str(gene_start) + ". Stop: " + str(gene_stop))
         if (((gene_start < loc_start and gene_stop > loc_start) or   (gene_start > loc_start and gene_stop > loc_start and gene_stop < loc_stop) or  (gene_start < loc_stop and gene_stop > loc_stop))  and g[0] == loc[0]):
             #if g not in chosenGenes:
             chosenGenes.append(g)
+            #print("added " + str(g))
             #ORFs.remove(g)
             genecounter =+ 1
 
