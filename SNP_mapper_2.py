@@ -118,7 +118,11 @@ def getSNPs(file,threshold,snp_freq_column,threshold_direction,contig):
                 else:
                     passed = 0
             if threshold_direction == "over":
+                print(freq)
+                print(threshold)
                 if freq > threshold:
+                    #print("passed")
+                    #print("freq:" + str(freq))
                     passed = 1
                 else:
                     passed = 0
@@ -222,10 +226,11 @@ totalORFs = len(ORFobjects)
 for ORF in ORFobjects:
     for snp in SNPobjects:
         if snp.position >= ORF.start and snp.position <= ORF.stop:
+            print("hit")
             ORF.hits = ORF.hits + 1
             #print("SNP pass value:" + str(snp.passed))
             ORF.critical_hits = ORF.critical_hits + snp.passed
-            SNPobjects.remove(snp)
+            #SNPobjects.remove(snp) NEVER EVER DO THIS AGAIN
             SNPs_on_ORFs = SNPs_on_ORFs + 1
     progress = progress +1
     intervalCounter = intervalCounter + 1
