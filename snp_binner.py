@@ -1,4 +1,7 @@
 # python snp_binner.py --bins 100 --genome_length 29432383 --snps data_4.csv
+# python snp_binner.py --bins 10 --genome_length 1000 --snps snps_for_binner_testset.csv
+#HEADER
+#bin,number of snps, bin start
 
 from Bio import SeqIO
 from Bio.Seq import Seq
@@ -55,22 +58,23 @@ print("Number of snps: " + str(len(snps)))
 
 binCounter = 0
 for bin, hits in binDic.items(): #count hits in bins
-    print("Analyzing bin " + str(binCounter + 1))
     #print(binsize)
-    binstart = binCounter * binsize + 1
-    binstop = binstart + binsize - 1
+    binstart = int(binCounter * binsize + 1)
+    binstop = int(binstart + binsize - 1)
     #print("Bin start: " + str(binstart))
     #print("Bin stop: " + str(binstop))
+    print("Analyzing bin " + str(binCounter + 1) + " (" + str(binstart) + "-" + str(binstop) + ")")
     for row in snps:
         #print(row[1])
-        if int(row[1]) > binstart and int(row[1]) < binstop:
+        if int(row[1]) >= binstart and int(row[1]) <= binstop:
             binDic[bin] += 1
+        #    snps.remove(row)
     binCounter += 1
 
 binCounter = 0
 for bin, hits in binDic.items(): #report bins
-    binstart = binCounter * binsize + 1
-    binstop = binstart + binsize - 1
+    binstart = int(binCounter * binsize + 1)
+    binstop = int(binstart + binsize - 1)
     #print("Bin start: " + str(binstart))
     #print("Bin stop: " + str(binstop))
     print("Bin: " + str(bin) + ". SNPs: " + str(hits))
@@ -80,12 +84,10 @@ for bin, hits in binDic.items(): #report bins
 print("Writing to file " + output + "...")
 
 binCounter = 0
+headerSet = 0
 with open(str(output), 'w') as f:  # write to file
     for key in binDic.keys():
-        if binCounter == 0: #add header if on first row
-            f.write("%s\t%s\t%s\n"%("bin","snps","bin_start"))
-        else:
-            binstart = binCounter * binsize + 1
-            binstop = binstart + binsize - 1
-            f.write("%s\t%s\t%s\n"%(key,binDic[key],binstart))
+        binstart = int(binCounter * binsize + 1)
+        binstop = int(binstart + binsize - 1)
+        f.write("%s\t%s\t%s\n"%(key,binDic[key],binstart))
         binCounter += 1
