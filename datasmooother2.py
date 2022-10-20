@@ -8,7 +8,7 @@ import sys
 import numpy as np
 import math
 
-file = "hybridize_poolseq.vs.D_flavomontana.ref_genome.unmasked.biallelic.tabs.allele_freq.private.sameway.limit0.5.chrom_info.txt"
+file = sys.argv[1]
 numberOfValuesToBeAveraged = 400
 
 averagedValues = []
